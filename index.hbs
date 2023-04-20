@@ -25,19 +25,21 @@ into the {body} of the default.hbs template --}}
 
 <main class="main-wrap">
   {{!-- Inject styles of the hero image to make it responsive --}}
-  {{> hero background=@site.cover_image}}
+  {{> hero_index}}
   <div class="m-hero__content" data-aos="fade-down">
-    <h1 class="m-hero-title bigger">{{@site.title}}</h1>
+    <h1 class="m-hero-title index much-bigger">{{@site.title}}</h1>
     {{#if @site.description}}
-      <p class="m-hero-description bigger">{{@site.description}}</p>
+      <p class="m-hero-description index much-bigger">{{@site.description}}</p>
     {{/if}}
-    {{#if @custom.use_custom_cta}}
-      <a href="{{@custom.custom_cta_url}}" class="m-button filled">{{@custom.custom_cta_text}}</a>
-    {{else}}
-      {{#if @labs.members}}
-        <a href="{{@site.url}}/newsletter" class="m-button filled js-newsletter">{{t "Subscribe"}}</a>
+    {{#unless @custom.disable_cta}}
+      {{#if @custom.use_custom_cta}}
+        <a href="{{@custom.custom_cta_url}}" class="m-button filled">{{@custom.custom_cta_text}}</a>
+      {{else}}
+        {{#if @labs.members}}
+          <a href="{{@site.url}}/newsletter" class="m-button filled js-newsletter">{{t "Subscribe"}}</a>
+        {{/if}}
       {{/if}}
-    {{/if}}
+    {{/unless}}
   </div>
   </section>
   <div class="l-content">
@@ -49,7 +51,7 @@ into the {body} of the default.hbs template --}}
               <div class="m-featured-slider__list swiper-wrapper">
                 {{#foreach featured}}
                   <div class="m-featured-slider__list__item swiper-slide">
-                    <article class="m-featured-article {{#unless feature_image}}no-picture{{/unless}}">
+                    <article class="m-featured-article {{#unless feature_image}}{{#unless @custom.default_feature_image}}no-picture{{/unless}}{{/unless}}">
                       <div class="m-featured-article__picture">
                         {{#if feature_image}}
                           <style>
@@ -59,6 +61,18 @@ into the {body} of the default.hbs template --}}
                             @media(max-width: 768px) {
                               #featured-bg-{{id}} {
                                 background-image: url({{img_url feature_image size='m'}});
+                              }
+                            }
+                          </style>
+                          <div id="featured-bg-{{id}}"></div>
+                        {{else if @custom.default_feature_image}}
+                          <style>
+                            #featured-bg-{{id}} {
+                              background-image: url({{img_url @custom.default_feature_image size='l'}});
+                            }
+                            @media(max-width: 768px) {
+                              #featured-bg-{{id}} {
+                                background-image: url({{img_url @custom.default_feature_image size='m'}});
                               }
                             }
                           </style>

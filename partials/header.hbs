@@ -77,7 +77,7 @@ This header template is shared across all the pages.
                               {{#foreach recent}}
                                 <div class="swiper-slide">
                                   <a href="{{url}}" class="m-recent-article">
-                                    <div class="m-recent-article__picture {{#unless feature_image}}no-picture{{/unless}}">
+                                    <div class="m-recent-article__picture {{#unless feature_image}}{{#unless @custom.default_feature_image}}no-picture{{/unless}}{{/unless}}">
                                       {{#if feature_image}}
                                         <img src="{{img_url feature_image size="s"}}" loading="lazy" alt="">
                                       {{else}}
@@ -112,6 +112,29 @@ This header template is shared across all the pages.
                         </ul>
                       {{/get}}
                     </section>
+                    <section class="m-neighbors">
+                      <h3 class="m-submenu-title">{{t "Neighbor"}}</h3>
+                      <ul>
+                        <li>
+                          <a href="https://blog.xqmmcqs.com/">xqmmcqs</a>
+                        </li>
+                        <li>
+                          <a href="https://blog.riddma.com/">riddma</a>
+                        </li>
+                        <li>
+                          <a href="https://maxlinn.site/">linn</a>
+                        </li>
+                        <li>
+                          <a href="https://xylog.cn/">xytoki</a>
+                        </li>
+                        <li>
+                          <a href="https://pophirasawa.top/">pophirasawa</a>
+                        </li>
+                        <li>
+                          <a href="https://blog.tonyzhao.xyz/">tonyzhao</a>
+                        </li>
+                      </ul>
+                    </section>
                   </div>
                 </div>
               </li>
@@ -121,14 +144,20 @@ This header template is shared across all the pages.
             <button class="m-icon-button in-menu-main js-open-search" aria-label="{{t "Open search"}}">
               <span class="icon-search" aria-hidden="true"></span>
             </button>
-            <div class="m-toggle-darkmode js-tooltip" data-tippy-content="{{t "Toggle dark mode"}}" tabindex="0">
-              <label for="toggle-darkmode" class="sr-only">
-                {{t "Toggle dark mode"}}
+            <div class="m-toggle-darkmode js-tooltip-theme-switch" tabindex="0">
+              <label id="toggle-darkmode-label-moon" for="toggle-darkmode" class="sr-only">
+                {{t "Switch to dark mode"}}
               </label>
-              <input id="toggle-darkmode" type="checkbox" class="js-toggle-darkmode">
-              <div>
+                <label id="toggle-darkmode-label-sun" for="toggle-darkmode" class="sr-only">
+                {{t "Switch to light mode"}}
+              </label>
+              <label id="toggle-darkmode-label-auto" for="toggle-darkmode" class="sr-only">
+                {{t "Switch to auto mode"}}
+              </label>
+              <div id="toggle-darkmode" class="js-toggle-darkmode">
                 <span class="icon-moon moon" aria-hidden="true"></span>
                 <span class="icon-sunny sun" aria-hidden="true"></span>
+                <span class="auto" aria-hidden="true">A</span>
               </div>
             </div>
           </div>

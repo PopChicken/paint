@@ -8,6 +8,10 @@
     font-size: 1.125rem;
   }
 
+  &.index {
+    font-family: 'Painted Font';
+  }
+
   &.bigger {
     line-height: 1.3;
     font-size: 1.125rem;
@@ -15,6 +19,16 @@
 
     @include respond-to('medium') {
       font-size: 1.375rem;
+    }
+  }
+
+  &.much-bigger {
+    line-height: 1.5;
+    font-size: 1.5rem;
+    margin-bottom:30px;
+
+    @include respond-to('medium') {
+      font-size: 1.75rem;
     }
   }
 

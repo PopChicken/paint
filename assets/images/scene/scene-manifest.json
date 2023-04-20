@@ -1,0 +1,28 @@
+{
+    "day": [
+        "/images/scene/day/0_Classroom_2.jpg",
+        "/images/scene/day/0_Classroom.jpg",
+        "/images/scene/day/0_Corporation_street.jpg",
+        "/images/scene/day/0_Evening_city.jpg",
+        "/images/scene/day/0_Music_class.jpg",
+        "/images/scene/day/0_Old_house.jpg",
+        "/images/scene/day/0_Port.jpg",
+        "/images/scene/day/0_Riverside.jpg",
+        "/images/scene/day/0_School_cafeteria.jpg",
+        "/images/scene/day/0_School.jpg",
+        "/images/scene/day/0_Tokyo_street.jpg"
+    ],
+    "night": [
+        "/images/scene/night/0_Corporation_street_night.jpg",
+        "/images/scene/night/0_Japan_street_night.jpg",
+        "/images/scene/night/0_Night_city.jpg",
+        "/images/scene/night/0_Night_riverside.jpg",
+        "/images/scene/night/0_Old_house_night_set.jpg",
+        "/images/scene/night/0_Tokyo_street_night.jpg",
+        "/images/scene/night/1_Night_city.jpg",
+        "/images/scene/night/2_Old_house_night_set.jpg",
+        "/images/scene/night/3_Summer_camp_backgrounds.jpg",
+        "/images/scene/night/4_Old_house_night_set.jpg",
+        "/images/scene/night/29_Summer_camp_backgrounds.jpg"
+    ]
+}

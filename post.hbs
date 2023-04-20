@@ -19,13 +19,21 @@ into the {body} of the default.hbs template --}}
 
 {{!-- Special header.hbs partial to generate the <header> tag --}}
 {{#post}}
-  {{> header background=feature_image}}
+  {{#if feature_image}}
+    {{> header background=feature_image}}
+  {{else if @custom.default_feature_image}}
+    {{> header background=@custom.default_feature_image}}
+  {{/if}}
 {{/post}}
 
 <main class="main-wrap">
   {{#post}}
     {{!-- Inject styles of the hero image to make it responsive --}}
-    {{> hero background=feature_image}}
+    {{#if feature_image}}
+      {{> hero background=feature_image}}
+    {{else if @custom.default_feature_image}}
+      {{> hero background=@custom.default_feature_image}}
+    {{/if}}
     </section>
     {{#if feature_image}}
       {{#if feature_image_caption}}
@@ -37,12 +45,12 @@ into the {body} of the default.hbs template --}}
       {{/if}}
     {{/if}}
   {{/post}}
-  
+
   <article>
     <div class="l-content in-post">
       {{!-- Everything inside the #post tags pulls data from the post --}}
       {{#post}}
-        <div class="l-wrapper in-post {{#unless feature_image}}no-image{{/unless}} js-aos-wrapper" data-aos="fade-up"
+        <div class="l-wrapper in-post {{#unless feature_image}}{{#unless @custom.default_feature_image}}no-image{{/unless}}{{/unless}} js-aos-wrapper" data-aos="fade-up"
           data-aos-delay="300">
           <div
             class="l-post-content js-progress-content">
@@ -53,10 +61,21 @@ into the {body} of the default.hbs template --}}
                   <a href="{{primary_tag.url}}" class="m-heading__meta__tag">{{primary_tag.name}}</a>
                   <span class="m-heading__meta__divider" aria-hidden="true">&bull;</span>
                 {{/if}}
-                <span class="m-heading__meta__time">{{date published_at}}</span>
+                <span class="m-heading__meta__time">{{t "Published at"}} {{date published_at}}</span>
+                <span class="m-heading__meta__divider" aria-hidden="true">&bull;</span>
+                <span class="m-heading__meta__time">{{t "Updated at"}} {{date updated_at}}</span>
+                <span class="m-heading__meta__divider post-views" style="display: none" aria-hidden="true">&bull;</span>
+                <span class="m-heading__meta__views post-views" style="display: none">
+                  <span class="post-views-count"></span>
+                  <span class="m-heading__meta__views">{{t "Post views"}}</span>
+                </span>
               </div>
             </header>
             <div class="pos-relative js-post-content">
+              <aside class="toc-container">
+                <div class="toc"></div>
+              </aside>
+              <hr>
               <div class="m-share">
                 <div class="m-share__content js-sticky">
                   <a href="https://www.facebook.com/sharer/sharer.php?u={{url absolute='true'}}"
@@ -79,7 +98,7 @@ into the {body} of the default.hbs template --}}
               {{!-- List of tags  --}}
               {{#if tags}}
                 <section class="m-tags in-post">
-                  <h3 class="m-submenu-title">{{t "Tags"}}</h3>
+                  <h3 class="m-submenu-title js-toc-ignore">{{t "Tags"}}</h3>
                   <ul>
                     {{#foreach tags}}
                       <li>

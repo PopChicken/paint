@@ -14,6 +14,13 @@ export const isDarkMode = () => {
   return darkModeMatcher && darkModeMatcher.matches;
 };
 
+export const isNoPreference = () => {
+  const noPreferenceMatcher =
+    window.matchMedia && window.matchMedia('(prefers-color-scheme: no-preference)');
+
+  return noPreferenceMatcher && noPreferenceMatcher.matches;
+};
+
 export const formatDate = date => {
   if (date) {
     return new Date(date).toLocaleDateString(document.documentElement.lang, {
