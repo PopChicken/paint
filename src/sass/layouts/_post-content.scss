@@ -427,7 +427,7 @@
 
     > code {
       display: block;
-      padding: 10px;
+      // padding: 10px 10px 0;
       white-space: pre;
       word-spacing: normal;
       word-break: normal;
@@ -442,7 +442,7 @@
       hyphens: none;
 
       @include respond-to("medium") {
-        padding: 20px;
+        // padding: 20px 20px 0;
       }
     }
 

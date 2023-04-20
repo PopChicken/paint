@@ -13,6 +13,8 @@ mix
   .js('js/home.js', 'js/')
   .js('js/post.js', 'js/')
   .js('js/page.js', 'js/')
+  .js('js/post_views.js', 'js/')
+  .js('js/toc.js', 'js/')
   .extract()
   .sass('sass/app.scss', 'css/')
   .sass('sass/home.scss', 'css/')

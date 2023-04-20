@@ -6,15 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     {{!-- Base Meta --}}
-    <title>{{meta_title}}</title>
+    <title>{{meta_title}} | {{@site.description}}</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     {{!-- Preload assets --}}
     <link rel="preload" href="{{asset "css/app.css"}}" as="style" />
+    <link rel="preload" href="{{asset "css/prism.css"}}" as="style" />
     <link rel="preload" href="{{asset "js/manifest.js"}}" as="script" />
     <link rel="preload" href="{{asset "js/vendor.js"}}" as="script" />
     <link rel="preload" href="{{asset "js/app.js"}}" as="script" />
+    <link rel="preload" href="{{asset "js/post_views.js"}}" as="script" />
+    <link rel="preload" href="{{asset "js/prism.js"}}" as="script" />
+    <link rel="preload" href="{{asset "js/toc.js"}}" as="script" />
+
+    {{!-- <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.10.0/tocbot.css" as="style" /> --}}
 
     {{!-- This #block helper will try to preload page-specific assets --}}
     {{{block "preload"}}}
@@ -22,6 +28,12 @@
     {{!-- Styles & Scripts --}}
     <style>
       /* These font-faces are here to make fonts work if the Ghost instance is installed in a subdirectory */
+
+      @font-face {
+        font-family: 'Painted Font';
+        font-style: normal;
+        src: url("{{asset 'fonts/site-title.woff'}}") format('woff');  
+      }
 
       /* source-sans-pro-regular */
       @font-face {
@@ -71,6 +83,9 @@
     </style>
 
     <link rel="stylesheet" type="text/css" href="{{asset "css/app.css"}}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{asset "css/prism.css"}}" media="screen" />
+
+    {{!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.10.0/tocbot.css" media="screen" /> --}}
 
     {{!-- This #block helper will inject a stylesheet for a specific page --}}
     {{{block "styles"}}}
@@ -140,12 +155,20 @@
     {{/if}}
 
     {{!-- The footer --}}
-    {{> footer}}
+    {{> footer background=@custom.light_mode_cover}}
 
     {{!-- Common scripts shared between pages --}}
     <script defer src="{{asset "js/manifest.js"}}"></script>
     <script defer src="{{asset "js/vendor.js"}}"></script>
     <script defer src="{{asset "js/app.js"}}"></script>
+    <script defer src="{{asset "js/post_views.js"}}"></script>
+    <script defer src="{{asset "js/prism.js"}}"></script>
+    <script defer src="{{asset "js/toc.js"}}"></script>
+
+    {{!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-markup.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-css.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-javascript.min.js"></script> --}}
 
     {{!-- The #block helper will pull in data from the #contentFor other template files --}}
     {{{block "scripts"}}}

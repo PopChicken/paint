@@ -7,9 +7,15 @@ import GhostContentAPI from '@tryghost/content-api';
 import Fuse from 'fuse.js/dist/fuse.basic.esm.min.js';
 import Swiper, { FreeMode, A11y } from 'swiper';
 import 'swiper/css';
-import { isRTL, formatDate, isMobile } from './helpers';
+import { isRTL, formatDate, isDarkMode, isMobile, isNoPreference } from './helpers';
 
 $(() => {
+  $('pre')
+    .addClass('language-')
+  $('pre code')
+    .addClass('language-')
+    .addClass('line-numbers')
+
   if (isRTL()) {
     $('html')
       .attr('dir', 'rtl')
@@ -38,10 +44,48 @@ $(() => {
   const $newsletterElements = $('.js-newsletter');
   const $nativeComments = $('.js-native-comments > div > iframe')[0];
   const currentSavedTheme = localStorage.getItem('theme');
+  const themeModeSwitch = tippy('.js-tooltip-theme-switch', {
+    hideOnClick: false
+  })[0]
 
   let fuse = null;
   let submenuIsOpen = false;
   let secondaryMenuTippy = null;
+  let themeMode = 'auto';
+
+  function updateTheme() {
+    // console.log(themeMode);
+    switch (themeMode) {
+      case 'dark':
+        $('html').attr('data-theme', 'dark');
+        break;
+      case 'light':
+        $('html').attr('data-theme', 'light');
+        break;
+      default:
+        $('html').removeAttr('data-theme');
+        break;
+    }
+  }
+
+  function updateTooltipLabel() {
+    // console.log(themeMode);
+    switch (themeMode) {
+      case 'dark':
+        themeModeSwitch.setContent($('#toggle-darkmode-label-sun').text());
+        break;
+      case 'light':
+        themeModeSwitch.setContent($('#toggle-darkmode-label-auto').text());
+        break;
+      case 'auto':
+        themeModeSwitch.setContent($('#toggle-darkmode-label-moon').text());
+        break;
+      default:
+        themeModeSwitch.setContent($('#toggle-darkmode-label-moon').text());
+        themeMode = 'auto';
+        break;
+    }
+  }
 
   const showSubmenu = () => {
     $header.addClass('submenu-is-active');
@@ -196,18 +240,31 @@ $(() => {
     }
   });
 
-  $toggleDarkMode.on('change', () => {
-    if ($toggleDarkMode.is(':checked')) {
-      $('html').attr('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      $('html').attr('data-theme', 'light');
-      localStorage.setItem('theme', 'light');
+  $toggleDarkMode.on('click', () => {
+    switch (themeMode) {
+      case 'dark':
+        localStorage.setItem('theme', 'light');
+        themeMode = 'light';
+        break;
+      case 'light':
+        localStorage.setItem('theme', 'auto');
+        themeMode = 'auto';
+        break;
+      case 'auto':
+        localStorage.setItem('theme', 'dark');
+        themeMode = 'dark';
+        break;
+      default:
+        localStorage.setItem('theme', 'auto');
+        themeMode = 'auto';
+        break;
     }
 
     if ($nativeComments) {
       $nativeComments.contentDocument.location.reload(true);
     }
+    updateTheme();
+    updateTooltipLabel();
   });
 
   $toggleDarkMode.on('mouseenter', () => {
@@ -234,12 +291,14 @@ $(() => {
   });
 
   if (currentSavedTheme) {
-    if (currentSavedTheme === 'dark') {
-      $toggleDarkMode.each(function() {
-        $(this).attr('checked', true);
-      });
-    }
+    themeMode = currentSavedTheme;
+    updateTheme();
+  } else if (isNoPreference()) {
+    themeMode = 'light';
+  } else {
+    themeMode = 'auto';
   }
+  updateTooltipLabel();
 
   if ($header.length > 0) {
     const headroom = new Headroom($header[0], {

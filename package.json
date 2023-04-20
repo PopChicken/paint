@@ -30,6 +30,9 @@
       }
     },
     "custom": {
+      "default_feature_image": {
+        "type": "image"
+      },
       "dark_mode_logo": {
         "type": "image"
       },
@@ -40,9 +43,31 @@
       "search_api_key": {
         "type": "text"
       },
+      "filing_record": {
+        "type": "text"
+      },
+      "filing_url": {
+        "type": "text"
+      },
+      "github": {
+        "type": "text"
+      },
       "disable_fade_animation": {
         "type": "boolean",
         "default": false
+      },
+      "light_mode_cover": {
+        "type": "image",
+        "group": "homepage"
+      },
+      "dark_mode_cover": {
+        "type": "image",
+        "group": "homepage"
+      },
+      "disable_cta": {
+        "type": "boolean",
+        "default": false,
+        "group": "homepage"
       },
       "use_custom_cta": {
         "type": "boolean",

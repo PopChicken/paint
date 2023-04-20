@@ -1,0 +1,25 @@
+.toc {
+  .toc-list {
+    list-style: none;
+
+    .toc-list-item {
+      margin-bottom: 0;
+
+      &.toc-link {
+        text-decoration: none;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      li {
+        list-style: none;
+      }
+
+      ol {
+        margin-bottom: 15px;
+      }
+    }
+  }
+}
