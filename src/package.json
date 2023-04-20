@@ -1,5 +1,5 @@
 {
-  "name": "liebling",
+  "name": "liebling-paint",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,8 +14,8 @@
     "production": "npm run build && npm run zip",
     "build": "npx mix --production",
     "zip": "run-script-os",
-    "zip:win32": "cd .. && 7z a -r -x!.git -x!src -x!liebling.zip liebling.zip *",
-    "zip:default": "cd .. && zip -r liebling.zip ./* -x '*.git*' -x '*src*' -x 'liebling.zip'",
+    "zip:win32": "cd .. && 7z a -r -x!.git -x!src -x!paint.zip paint.zip *",
+    "zip:default": "cd .. && zip -r paint.zip ./* -x '*.git*' -x '*src*' -x 'paint.zip'",
     "order-locales": "node order-locales.js"
   },
   "husky": {

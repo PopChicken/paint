@@ -20,7 +20,7 @@ You can see a live demo here: [https://liebling.eduardogomez.io](https://lieblin
 
 ## Download
 
-To get the latest version please head over the [releases page](https://github.com/eddiesigner/liebling/releases) and download the file `liebling.zip` of the latest release.
+To get the latest version please head over the [releases page](https://github.com/eddiesigner/liebling/releases) and download the file `paint.zip` of the latest release.
 
 ## Documentation
 
